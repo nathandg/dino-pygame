@@ -13,6 +13,7 @@ SCREEN_HEIGHT = 700
 INITIAL_VELOCITY = 6
 
 pygame.init()
+pygame.mixer.init()
 
 #Initialize screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -20,8 +21,13 @@ pygame.display.set_caption('Dino Game')
 pygame.font.init()
 
 #Load images
-background_image = pygame.image.load('assets/background.png')
+background_image = pygame.image.load('assets/imgs/background.png')
 background_size = background_image.get_size()
+
+#Load sounds
+game_over_sound = pygame.mixer.Sound('assets/sounds/game_over.mp3')
+jump_sound = pygame.mixer.Sound('assets/sounds/jump.mp3')
+mini_sound = pygame.mixer.Sound('assets/sounds/mini.mp3')
 
 dino = Dino()
 scenario = Scenario(screen, background_image, background_size, INITIAL_VELOCITY)
@@ -40,8 +46,10 @@ while True:
     elif event.type == pygame.KEYDOWN:
       if event.key == pygame.K_SPACE:
         dino.jump()
+        jump_sound.play()
       elif event.key == pygame.K_DOWN:
         dino.mini_size()
+        mini_sound.play()
     elif event.type == pygame.KEYUP:
       if event.key == pygame.K_DOWN:
         dino.normal_size()
@@ -71,8 +79,17 @@ while True:
   
   # Check collision
   if dino.collide(obstacles):
+    # Display game over
+    game_over_text = font.render('Game Over', True, (255, 255, 255))
+    screen.blit(game_over_text, (SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2))
+    #Display score
+    score_text = font.render(
+      f'Pontuação: {score // 60}', True, (255, 255, 255))
+    screen.blit(score_text, (SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2 + 50))
+    pygame.display.flip()
+    game_over_sound.play()
+    pygame.time.wait(int(game_over_sound.get_length() * 1000))
     pygame.quit()
-    sys.exit()
   
   # Clear screen
   screen.fill((0, 0, 0))

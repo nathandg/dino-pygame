@@ -5,7 +5,7 @@ class Dino(pygame.sprite.Sprite):
     super().__init__()
     self.floor = 400
     
-    self.image = pygame.image.load('assets/dino.png')
+    self.image = pygame.image.load('assets/imgs/dino.png')
     self.image = pygame.transform.scale(self.image, (200, 200))
     
     self.real_space = pygame.Surface((140, 120))    

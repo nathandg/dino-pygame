@@ -6,9 +6,9 @@ class FloorObstacle(pygame.sprite.Sprite):
     super().__init__()
     
     self.images = [
-      pygame.image.load('assets/obstacle1.png'),
-      pygame.image.load('assets/obstacle2.png'),
-      pygame.image.load('assets/obstacle3.png'),
+      pygame.image.load('assets/imgs/obstacle1.png'),
+      pygame.image.load('assets/imgs/obstacle2.png'),
+      pygame.image.load('assets/imgs/obstacle3.png'),
     ]
     self.image = random.choice(self.images)
     
