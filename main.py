@@ -91,7 +91,8 @@ class DinoGame:
                 self.screen.blit(score_text, (self.SCREEN_WIDTH // 2 - 100, self.SCREEN_HEIGHT // 2 + 50))
                 pygame.display.flip()
                 self.game_over_sound.play()
-                pygame.time.wait(int(self.game_over_sound.get_length() * 1000))
+                pygame.time.wait(int(self.game_over_sound.get_length() * 500))
+                return
 
             # Draw background
             self.screen.fill((0, 0, 0))
@@ -113,5 +114,8 @@ class DinoGame:
             self.score += 1
             
 if __name__ == '__main__':
-  game = DinoGame()
-  game.run()
+  
+  while True:
+    game = DinoGame()
+    game.run()
+    pygame.quit()
