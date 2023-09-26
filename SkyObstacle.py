@@ -1,11 +1,15 @@
 import pygame
+import random
 
 class SkyObstacle(pygame.sprite.Sprite):
   def __init__(self, screen_width):
     super().__init__()
     
-    self.image = pygame.image.load('assets/imgs/fireball.png')
-    self.image = pygame.transform.scale(self.image, (300, 100))
+    self.images = [
+      pygame.image.load('assets/imgs/fireball.png'),
+      pygame.image.load('assets/imgs/plane.png'), 
+    ]
+    self.image = random.choice(self.images)
     
     self.real_space = pygame.Surface((200, 60))
     self.real_space.fill((255, 0, 0))

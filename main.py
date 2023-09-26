@@ -11,7 +11,7 @@ class DinoGame:
         # Configs
         self.SCREEN_WIDTH = 1000
         self.SCREEN_HEIGHT = 700
-        self.INITIAL_VELOCITY = 6
+        self.INITIAL_VELOCITY = 7
 
         pygame.init()
         pygame.mixer.init()
@@ -47,7 +47,7 @@ class DinoGame:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    sys.exit()
+                    exit()
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         self.dino.jump()
