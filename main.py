@@ -61,18 +61,23 @@ class DinoGame:
 
 
             # Create obstacles
-            if self.min_space_obstacle >= 90:
-                random_number = random.randint(0, 500)
-                if random_number <= 50:
+            if self.min_space_obstacle >= random.randint(90, 150) - self.velocity:
+                random_number = random.randint(0, 1000)
+                if random_number <= 150:
                     self.min_space_obstacle = 30
                     obstacle = FloorObstacle(self.SCREEN_WIDTH)
                     self.obstacles.add(obstacle)
-                elif random_number <= 100:
+                elif random_number <= 200:
                     self.min_space_obstacle = 0
                     obstacle = SkyObstacle(self.SCREEN_WIDTH)
                     self.obstacles.add(obstacle)
             else:
                 self.min_space_obstacle += 1
+            
+            # Remove obstacles
+            for obstacle in self.obstacles:
+                if obstacle.rect.x < -obstacle.rect.width:
+                    self.obstacles.remove(obstacle)
 
             # Increase velocity
             if self.score % 650 == 0:
